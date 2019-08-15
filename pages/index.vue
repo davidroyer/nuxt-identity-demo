@@ -3,10 +3,16 @@
     <div>
       <logo />
       <h1 class="title">
-        nuxt-identity-demo
+        Nuxt Identity Demo
       </h1>
       <b-button @click="login">Login</b-button>
+      <b-button @click="logout">Logout</b-button>
       <b-button @click="signUp">Sign Up</b-button>
+
+      <hr />
+      <div v-if="user">
+        <pre>{{ user }}</pre>
+      </div>
     </div>
   </div>
 </template>
@@ -20,12 +26,25 @@ export default {
     Logo
   },
   middleware: 'auth',
+  computed: {
+    user() {
+      return this.$store.state.currentUser || {}
+    }
+  },
   methods: {
     async login() {
       const userData = await this.$identity.login(email, password, true)
       this.$store.commit('setCurrentUser', userData)
-      // console.log('TCL: login -> userData', userData)
       alert('Signed In')
+    },
+
+    async logout() {
+      const user = await this.$identity.currentUser()
+      // eslint-disable-next-line no-console
+      console.log('TCL: logout -> user', user)
+      this.$store.dispatch('handleUserUpdate', null)
+      await user.logout()
+      alert('Logged Out')
     },
 
     async signUp() {

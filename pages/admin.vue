@@ -1,13 +1,19 @@
 <template>
   <div>
     <h1>Admin</h1>
+    <div v-if="user">
+      <pre>{{ user }}</pre>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  //   middleware: 'auth',
-  methods: {}
+  computed: {
+    user() {
+      return this.$store.state.currentUser || {}
+    }
+  }
 }
 </script>
 

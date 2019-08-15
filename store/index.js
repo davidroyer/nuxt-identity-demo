@@ -10,6 +10,16 @@ export const mutations = {
 }
 
 export const actions = {
+  nuxtClientInit({ commit }, user) {
+    commit('setCurrentUser', user)
+  },
+
+  handleUserUpdate({ commit }, user) {
+    commit('setCurrentUser', user)
+  }
+  // async nuxtClientInit({ commit }) {
+  //   commit('dispatchAction')
+  // }
   // async nuxtServerInit({ commit, state }, { req, app }) {
   //   const user = await app.$identity.currentUser()
   //   console.log('TCL: user', user)

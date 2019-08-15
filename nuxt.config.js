@@ -40,7 +40,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/identity.js'],
+  plugins: [
+    { src: '@/plugins/identity.js', mode: 'client' },
+    { src: '@/plugins/client-auth.js', mode: 'client' }
+  ],
   /*
    ** Nuxt.js dev-modules
    */

@@ -1,5 +1,18 @@
+/* eslint-disable no-console */
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+console.log(
+  'process.env.NETLIFY_IDENTITY_URL: ',
+  process.env.NETLIFY_IDENTITY_URL
+)
+
 export default {
   mode: 'universal',
+
+  env: {
+    NETLIFY_IDENTITY_URL: process.env.NETLIFY_IDENTITY_URL
+  },
   /*
    ** Headers of the page
    */

@@ -13,8 +13,8 @@
 
 <script>
 import Logo from '~/components/Logo.vue'
-const email = 'droyer@wiley.com'
-const password = 'Focus2019@'
+const email = 'droyer01@gmail.com'
+const password = 'Dance4life'
 export default {
   components: {
     Logo

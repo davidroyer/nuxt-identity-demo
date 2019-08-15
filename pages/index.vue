@@ -6,13 +6,15 @@
         nuxt-identity-demo
       </h1>
       <b-button @click="login">Login</b-button>
+      <b-button @click="signUp">Sign Up</b-button>
     </div>
   </div>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
-
+const email = 'droyer@wiley.com'
+const password = 'Focus2019@'
 export default {
   components: {
     Logo
@@ -20,12 +22,15 @@ export default {
   middleware: 'auth',
   methods: {
     async login() {
-      const email = 'droyer@wiley.com'
-      const password = 'Focus2019@'
       const userData = await this.$identity.login(email, password, true)
       this.$store.commit('setCurrentUser', userData)
       // console.log('TCL: login -> userData', userData)
       alert('Signed In')
+    },
+
+    async signUp() {
+      await this.$identity.signup(email, password)
+      alert('signed up!')
     }
   }
 }

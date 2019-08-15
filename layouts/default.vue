@@ -3,7 +3,7 @@
     <nav>
       <nuxt-link to="/">Home</nuxt-link>
       <nuxt-link to="/admin">Admin</nuxt-link>
-      <nuxt-link to="/sign-in">Sign In</nuxt-link>
+      <nuxt-link to="/login">Sign In</nuxt-link>
     </nav>
     <nuxt />
   </div>

@@ -25,7 +25,7 @@ export default {
   components: {
     Logo
   },
-  middleware: 'auth',
+
   computed: {
     user() {
       return this.$store.state.currentUser || {}

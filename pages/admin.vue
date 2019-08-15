@@ -13,7 +13,9 @@ export default {
     user() {
       return this.$store.state.currentUser || {}
     }
-  }
+  },
+
+  middleware: 'admin-guard'
 }
 </script>
 

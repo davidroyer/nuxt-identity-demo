@@ -2,6 +2,8 @@
   <div>
     <h1>Admin</h1>
     <div v-if="user">
+      <strong>user.email</strong>
+      <hr />
       <pre>{{ user }}</pre>
     </div>
   </div>

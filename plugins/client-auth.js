@@ -4,6 +4,5 @@ export default async (context) => {
     const user = await context.app.$identity.currentUser()
     console.log('from client-auth: user', user)
     context.store.dispatch('nuxtClientInit', user)
-    // await context.store.dispatch('nuxtClientInit', context)
   }
 }

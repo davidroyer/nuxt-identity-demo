@@ -9,8 +9,9 @@
       <b-button @click="logout">Logout</b-button>
       <b-button @click="signUp">Sign Up</b-button>
 
-      <hr />
-      <div v-if="user">
+      <div v-if="user" style="margin-top: 1.5em;">
+        <strong>user.email</strong>
+        <hr />
         <pre>{{ user }}</pre>
       </div>
     </div>

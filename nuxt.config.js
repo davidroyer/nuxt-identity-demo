@@ -2,13 +2,11 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-console.log(
-  'process.env.NETLIFY_IDENTITY_URL: ',
-  process.env.NETLIFY_IDENTITY_URL
-)
+const isDev = process.env.NODE_ENV === 'development'
+console.log('TCL: isDev', isDev)
 
 export default {
-  mode: 'universal',
+  mode: isDev ? 'spa' : 'universal',
 
   env: {
     NETLIFY_IDENTITY_URL: process.env.NETLIFY_IDENTITY_URL

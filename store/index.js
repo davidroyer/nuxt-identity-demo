@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 export const state = () => ({
   currentUser: null
 })
@@ -17,14 +16,4 @@ export const actions = {
   handleUserUpdate({ commit }, user) {
     commit('setCurrentUser', user)
   }
-  // async nuxtClientInit({ commit }) {
-  //   commit('dispatchAction')
-  // }
-  // async nuxtServerInit({ commit, state }, { req, app }) {
-  //   const user = await app.$identity.currentUser()
-  //   console.log('TCL: user', user)
-  //   if (user) await user.jwt()
-  //   else Promise.resolve()
-  //   commit('setCurrentUser', user)
-  // }
 }

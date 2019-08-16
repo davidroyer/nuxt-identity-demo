@@ -1,12 +1,16 @@
 <template>
-  <div>
-    <nav>
-      <nuxt-link to="/">Home</nuxt-link>
-      <nuxt-link to="/admin">Admin</nuxt-link>
-      <nuxt-link to="/login">Sign In</nuxt-link>
-    </nav>
-    <nuxt />
-  </div>
+  <b-container fluid class="bv-example-row">
+    <b-row class="justify-content-center">
+      <b-col sm="10" md="7">
+        <nav>
+          <nuxt-link to="/">Home</nuxt-link>
+          <nuxt-link to="/admin">Admin</nuxt-link>
+          <nuxt-link to="/login">Login</nuxt-link>
+        </nav>
+        <nuxt />
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <style>
@@ -56,5 +60,17 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-active {
+  opacity: 0;
+}
+nav {
+  margin-bottom: 2em;
 }
 </style>

@@ -3,11 +3,10 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 const isDev = process.env.NODE_ENV === 'development'
-console.log('TCL: isDev', isDev)
 
 export default {
-  mode: isDev ? 'spa' : 'universal',
-
+  // mode: isDev ? 'spa' : 'universal',
+  mode: 'universal',
   env: {
     NETLIFY_IDENTITY_URL: process.env.NETLIFY_IDENTITY_URL
   },
@@ -71,5 +70,7 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
-  }
+  },
+
+  serverMiddleware: ['@/serverMiddleware/selectiveSSR.js']
 }

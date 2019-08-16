@@ -5,6 +5,10 @@
       <h1 class="title">
         Nuxt Identity Demo
       </h1>
+      <section>
+        <p>URL: {{ $route.fullPath }}</p>
+        <p>SSR: {{ ssr ? 'true' : 'false' }}</p>
+      </section>
       <b-button @click="login">Login</b-button>
       <b-button @click="logout">Logout</b-button>
       <b-button @click="signUp">Sign Up</b-button>
@@ -19,19 +23,20 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
 const email = 'droyer01@gmail.com'
 const password = 'Dance4life'
 export default {
-  components: {
-    Logo
-  },
-
   computed: {
     user() {
       return this.$store.state.currentUser || {}
     }
   },
+  asyncData() {
+    return {
+      ssr: process.server
+    }
+  },
+
   methods: {
     async login() {
       const userData = await this.$identity.login(email, password, true)
@@ -41,8 +46,6 @@ export default {
 
     async logout() {
       const user = await this.$identity.currentUser()
-      // eslint-disable-next-line no-console
-      console.log('TCL: logout -> user', user)
       this.$store.dispatch('handleUserUpdate', null)
       await user.logout()
       alert('Logged Out')

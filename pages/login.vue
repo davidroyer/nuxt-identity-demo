@@ -22,21 +22,24 @@
 <script>
 export default {
   middleware: 'authenicated-checker',
-
   data: () => ({
     loginEmail: '',
     loginPassword: ''
   }),
+  mounted() {
+    // eslint-disable-next-line nuxt/no-env-in-hooks
+    if (process.client) {
+      const { hash } = window.location
+      console.log('TCL: mounted -> hash', hash)
+    }
+  },
 
   methods: {
     async login() {
-      const userData = await this.$identity.login(
-        this.loginEmail,
-        this.loginPassword,
-        true
-      )
-      this.$store.commit('setCurrentUser', userData)
-      alert('Signed In')
+      await this.$store.distpach('handleLogin', {
+        email: this.loginEmail,
+        password: this.loginPassword
+      })
     }
   }
 }

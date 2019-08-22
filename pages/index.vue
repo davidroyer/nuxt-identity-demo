@@ -1,15 +1,14 @@
 <template>
   <div class="container">
     <div>
-      <h1 class="title">
-        Nuxt Identity Demo
-      </h1>
+      <h1 class="title">Nuxt Identity Demo</h1>
       <section>
         <p>URL: {{ $route.fullPath }}</p>
         <p>SSR: {{ ssr ? 'true' : 'false' }}</p>
       </section>
       <b-button @click="login">Login</b-button>
       <b-button @click="logout">Logout</b-button>
+      <b-button @click="updateUserData">Update User Data</b-button>
       <b-button @click="signUp">Sign Up</b-button>
 
       <div v-if="user" style="margin-top: 1.5em;">
@@ -30,17 +29,38 @@ export default {
       return this.$store.state.currentUser || {}
     }
   },
+
   asyncData() {
     return {
       ssr: process.server
     }
   },
 
+  mounted() {
+    // eslint-disable-next-line nuxt/no-env-in-hooks
+    if (process.client) {
+      const { hash } = window.location
+      console.log('TCL: mounted -> hash', hash)
+    }
+  },
+
   methods: {
+    async updateUserData() {
+      const updatedUser = await this.$identity.currentUser().update({
+        data: {
+          courses: ['course1', 'course2'],
+          stringValue: 'Some string',
+          objectValue: {
+            propA: 'Property A',
+            propB: 'Property B'
+          }
+        }
+      })
+      console.log('updatedUser', updatedUser)
+    },
+
     async login() {
-      const userData = await this.$identity.login(email, password, true)
-      this.$store.commit('setCurrentUser', userData)
-      alert('Signed In')
+      await this.$store.dispatch('handleLogin', { email, password })
     },
 
     async logout() {
@@ -51,8 +71,10 @@ export default {
     },
 
     async signUp() {
-      await this.$identity.signup(email, password)
-      alert('signed up!')
+      await this.$store.dispatch('handleSignUp', {
+        email: 'droyer@wiley.com',
+        password: 'Dance4life'
+      })
     }
   }
 }

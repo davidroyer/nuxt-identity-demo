@@ -15,5 +15,29 @@ export const actions = {
 
   handleUserUpdate({ commit }, user) {
     commit('setCurrentUser', user)
+  },
+
+  async handleLogin({ commit }, { email, password }) {
+    const user = await this.$identity.login(email, password, true)
+    commit('setCurrentUser', user)
+    alert('Signed In')
+    this.$router.push('/admin')
+  },
+
+  async handleSignUp({ commit }, credentials) {
+    const { email, password } = credentials
+    console.log('TCL: handleSignUp -> credentials', credentials)
+    await this.$identity.signup(email, password)
+    alert('signed up! Check your email')
+  },
+
+  async handleConfirmation({ dispatch }, token) {
+    const response = await this.$identity.confirm(token)
+    console.log(
+      'Account confirmed! Welcome to the party!',
+      JSON.stringify({ response })
+    )
+    alert('Account confirmed! Welcome to the party!')
+    this.$router.push('/login')
   }
 }

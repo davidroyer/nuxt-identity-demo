@@ -36,11 +36,39 @@ export default {
     }
   },
 
-  mounted() {
+  // beforeRouteEnter(to, from, next) {
+  //   console.log('beforeRouteEnter: to, from', to, from)
+  //   if (process.client) {
+  //     console.log('hash-handler ran')
+
+  //     const { hash } = window.location
+  //     if (hash !== '') {
+  //       const token = hash.split('=')
+  //       const [actionName, tokenValue] = token
+  //       console.log('TCL: actionName, tokenValue', actionName, tokenValue)
+  //       alert('here!')
+  //       next({ name: '/test-routes' })
+  //     } else next()
+  //     // this.$router.push('/logisn')
+  //     // return redirect('/test-route')
+  //   }
+  //   next()
+  // },
+
+  async mounted() {
     // eslint-disable-next-line nuxt/no-env-in-hooks
-    if (process.client) {
-      const { hash } = window.location
-      console.log('TCL: mounted -> hash', hash)
+    console.log('hash-handler ran')
+
+    const { hash } = window.location
+    if (hash !== '') {
+      const token = hash.split('=')
+      const [actionName, tokenValue] = token
+      console.log('TCL: actionName, tokenValue', actionName, tokenValue)
+      const confirmResponse = await this.$identity.confirm(tokenValue)
+      console.log('TCL: mounted -> confirmResponse', confirmResponse)
+      this.$router.push('/login')
+    } else {
+      await Promise.resolve()
     }
   },
 

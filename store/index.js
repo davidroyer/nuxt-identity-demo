@@ -24,9 +24,7 @@ export const actions = {
     this.$router.push('/admin')
   },
 
-  async handleSignUp({ commit }, credentials) {
-    const { email, password } = credentials
-    console.log('TCL: handleSignUp -> credentials', credentials)
+  async handleSignUp({ commit }, { email, password }) {
     await this.$identity.signup(email, password)
     alert('signed up! Check your email')
   },
